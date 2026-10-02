@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KotaKu — Survei Kota Favorit di Indonesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--mauve:#a96274;--mauve-d:#8f4d5f;--plum:#6a2c4e;--blush:#f7e6e8;--ink:#1f1a1c;--mut:#6f6468;--bg:#fdfbfb;--card:#fff;--line:#eee3e5;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.top{background:var(--mauve);color:#fff;font-size:12px;padding:8px 0}
+.top .wrap{display:flex;justify-content:space-between;gap:10px}
+header{background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);transition:box-shadow .3s}
+header.sc{box-shadow:0 6px 20px rgba(106,44,78,.1)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:2px;color:var(--plum);display:flex;align-items:center;gap:8px}
+nav{display:flex;gap:30px}
+nav a{font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 0;border-bottom:2px solid transparent;transition:.25s}
+nav a:hover,nav a.on{color:var(--mauve);border-color:var(--mauve)}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--plum)}
+.btn{display:inline-block;background:var(--mauve);color:#fff;border:0;padding:14px 30px;font:500 12px var(--sans);letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:transform .25s,background .25s,box-shadow .25s}
+.btn:hover{background:var(--mauve-d);transform:translateY(-2px);box-shadow:0 8px 18px rgba(169,98,116,.35)}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.w{background:#fff;color:var(--plum)}.btn.w:hover{background:var(--blush)}
+.hero{background:linear-gradient(120deg,#f3d9dc 0%,#e9c3c9 55%,#d9a9b3 100%);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:480px;gap:20px}
+.hero small{letter-spacing:2px;font-size:12px;text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,5.5vw,62px);line-height:1.1;margin:14px 0 18px}
+.hero p{max-width:380px;margin-bottom:28px;color:#3b2f33}
+.stage{position:relative;height:400px}
+.pod{position:absolute;bottom:20px;left:8%;right:8%;height:46px;background:linear-gradient(#fff,#eadfe0);border-radius:6px;box-shadow:0 20px 30px rgba(106,44,78,.2)}
+.tube{position:absolute;bottom:60px;border-radius:14px 14px 22px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;color:var(--plum);font-family:var(--serif);box-shadow:0 14px 26px rgba(106,44,78,.25);animation:fl 5s ease-in-out infinite}
+.tube b{font-size:34px;display:block;margin-bottom:6px}.tube span{font-size:15px;letter-spacing:1px}
+.t1{left:10%;width:30%;height:200px;background:linear-gradient(160deg,#fff4f4,#f2c9cf)}
+.t2{left:38%;width:30%;height:290px;background:linear-gradient(160deg,#fde3e3,#e8aab5);animation-delay:-1.6s}
+.t3{left:66%;width:26%;height:160px;background:linear-gradient(160deg,#f3d0d6,#c98595);animation-delay:-3s}
+@keyframes fl{50%{transform:translateY(-10px)}}
+.feat{margin:-30px auto 0;position:relative;z-index:5}
+.feat .box{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 30px rgba(106,44,78,.08);display:grid;grid-template-columns:repeat(4,1fr);padding:22px 10px}
+.fi{display:flex;gap:12px;align-items:center;padding:0 18px}
+.fi i{font-style:normal;font-size:28px}.fi b{display:block;font-size:13px}.fi span{font-size:12px;color:var(--mut)}
+section{padding:70px 0}
+.st{font-family:var(--serif);font-weight:500;text-align:center;font-size:22px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:34px}
+.ovals{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.ov{text-align:center;cursor:pointer;background:none;border:0;font:inherit}
+.ov .im{aspect-ratio:3/4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:54px;transition:transform .4s,box-shadow .4s}
+.ov:hover .im{transform:translateY(-8px) scale(1.03);box-shadow:0 16px 28px rgba(106,44,78,.2)}
+.ov b{display:block;margin-top:14px;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.promo{display:grid;grid-template-columns:5fr 7fr;gap:0;border-radius:6px;overflow:hidden}
+.pl{background:var(--mauve);color:#fff;padding:50px 38px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.pl small{letter-spacing:2px;font-size:12px;text-transform:uppercase;opacity:.9}
+.pl h2{font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.2;margin:12px 0}
+.pl p{margin-bottom:24px;opacity:.95}
+.pr{background:linear-gradient(135deg,#f4ebe8,#e6d5d3);min-height:320px;display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;padding:30px}
+.sc2{background:#fff;border-radius:50%;width:150px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(106,44,78,.15)}
+.sc2 b{font-family:var(--serif);font-size:34px;color:var(--plum)}.sc2 span{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:1px}
+.row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+.row h3{font-size:16px;letter-spacing:1.5px;text-transform:uppercase}
+.row a{color:var(--mauve);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px 16px;text-align:center;position:relative;transition:transform .35s,box-shadow .35s}
+.pc:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(106,44,78,.12)}
+.rk{position:absolute;top:10px;left:10px;background:var(--plum);color:#fff;font-size:11px;font-weight:700;border-radius:20px;padding:2px 10px}
+.pc .em{height:110px;display:flex;align-items:center;justify-content:center;font-size:56px;border-radius:50% 50% 8px 8px/60% 60% 8px 8px;margin:6px 14px 14px}
+.pc h4{font-size:14px}.pc p{font-size:12px;color:var(--mut);min-height:36px}
+.vt{color:var(--plum);font-weight:700;margin:8px 0 6px}
+.bar{height:6px;background:var(--blush);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mauve),var(--plum));border-radius:6px;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.pc .btn{width:100%;padding:11px}
+.survey{background:var(--blush)}
+.sv{display:grid;grid-template-columns:7fr 5fr;gap:30px;align-items:start}
+.card{background:#fff;border-radius:8px;padding:32px;box-shadow:0 10px 30px rgba(106,44,78,.08)}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px}
+input,select,textarea{width:100%;font:inherit;padding:12px 14px;border:1px solid #e3d3d6;border-radius:4px;background:#fff;margin-bottom:18px;transition:border .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--mauve);box-shadow:0 0 0 3px rgba(169,98,116,.15)}
+textarea{resize:vertical;min-height:90px}
+.msg{margin-top:14px;font-size:14px;min-height:20px}.msg.ok{color:#2c7a4b}.msg.er{color:#b3261e}
+.rc{padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.rc:last-child{border:0}
+.rc b{color:var(--plum)}.rc span{display:block;color:var(--mut);font-size:13px}
+.svc{background:#f9e9ec;padding:26px 0}
+.svc .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc div{display:flex;gap:12px;align-items:center;font-size:12px}.svc i{font-style:normal;font-size:26px}.svc b{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+footer{background:var(--plum);color:#f1dfe6;padding:50px 0 24px;font-size:13px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+footer h5{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:12px}
+footer a{display:block;margin-bottom:7px;opacity:.85}footer a:hover{opacity:1}
+.cp{max-width:1180px;margin:30px auto 0;padding:18px 20px 0;border-top:1px solid rgba(255,255,255,.15);font-size:12px;opacity:.8}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,40px);background:var(--plum);color:#fff;padding:12px 22px;border-radius:30px;font-size:14px;opacity:0;pointer-events:none;transition:.4s;z-index:99}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.rv.l{transform:translateX(-40px)}.rv.r{transform:translateX(40px)}.rv.l.in,.rv.r.in{transform:none}
+@media(max-width:900px){
+.burger{display:block}
+nav{position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:0 20px;max-height:0;overflow:hidden;transition:max-height .4s;border-bottom:1px solid var(--line)}
+nav.open{max-height:360px}nav a{padding:14px 0}
+.hero .wrap,.promo,.sv{grid-template-columns:1fr}
+.stage{height:320px}.feat .box,.svc .wrap,.grid{grid-template-columns:1fr 1fr;gap:18px}
+.ovals{grid-template-columns:repeat(3,1fr)}footer .wrap{grid-template-columns:1fr 1fr}
+.top .wrap span:last-child{display:none}
+}
+@media(max-width:520px){.ovals{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.pl{padding:36px 24px}.card{padding:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><span>🗳️ Survei gratis &amp; anonim — suaramu menentukan kota favorit Indonesia</span><span>Data tersinkron dengan Google Sheets</span></div></div>
+<header id="hd"><div class="wrap">
+<a href="#beranda" class="logo">🍃 KOTAKU</a>
+<nav id="nav"><a href="#beranda" class="on">Beranda</a><a href="#kota">Kota</a><a href="#peringkat">Peringkat</a><a href="#survei">Survei</a><a href="#kontak">Kontak</a></nav>
+<button class="burger" id="bg" aria-label="Menu">☰</button>
+</div></header>
+
+<main>
+<div class="hero" id="beranda"><div class="wrap">
+<div class="rv l"><small>Survei Terbaru</small><h1>Kota Favorit.<br>Suara Nyata.</h1><p>Kota mana yang paling kamu cintai? Ikut survei singkat dan lihat hasilnya langsung dari seluruh Indonesia.</p><a href="#survei" class="btn">Ikut Survei</a></div>
+<div class="stage rv r"><div class="pod"></div>
+<div class="tube t1"><b>🏯</b><span>Yogyakarta</span></div>
+<div class="tube t2"><b>🌸</b><span>Bandung</span></div>
+<div class="tube t3"><b>🏝️</b><span>Bali</span></div></div>
+</div></div>
+
+<div class="wrap feat"><div class="box rv">
+<div class="fi"><i>🔒</i><div><b>Anonim &amp; Aman</b><span>Data pribadi terjaga</span></div></div>
+<div class="fi"><i>⚡</i><div><b>Real-time</b><span>Hasil langsung tampil</span></div></div>
+<div class="fi"><i>📊</i><div><b>Transparan</b><span>Dihitung dari spreadsheet</span></div></div>
+<div class="fi"><i>🇮🇩</i><div><b>Untuk Indonesia</b><span>Gratis untuk semua</span></div></div>
+</div></div>
+
+<section id="kota"><div class="wrap">
+<h2 class="st rv">Jelajahi Kota</h2>
+<div class="ovals" id="ovals"></div>
+</div></section>
+
+<div class="wrap"><div class="promo rv">
+<div class="pl"><small>Survei Terbuka</small><h2>Satu Suara,<br>Satu Kota Favorit</h2><p>Pilih kota impianmu dan ceritakan alasannya hari ini.</p><a href="#survei" class="btn w">Vote Sekarang</a></div>
+<div class="pr"><div class="sc2"><b id="total">0</b><span>Responden</span></div><div class="sc2"><b id="leader" style="font-size:20px;text-align:center">–</b><span>Terdepan</span></div></div>
+</div></div>
+
+<section id="peringkat"><div class="wrap">
+<div class="row rv"><h3>Peringkat Kota</h3><a id="refresh">PERBARUI</a></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<section class="survey" id="survei"><div class="wrap">
+<h2 class="st rv">Isi Survei</h2>
+<div class="sv">
+<div class="card rv l">
+<div id="f">
+<label for="nm">Nama</label><input id="nm" maxlength="50" placeholder="Nama kamu" autocomplete="name">
+<label for="ct">Kota Favorit</label><select id="ct"></select>
+<label for="rs">Alasan (opsional)</label><textarea id="rs" maxlength="200" placeholder="Kenapa kota ini favoritmu?"></textarea>
+<button class="btn" id="sb">Kirim Suara</button>
+<div class="msg" id="ms" role="status"></div>
+</div></div>
+<div class="card rv r"><h3 style="font-size:16px;margin-bottom:8px;letter-spacing:1px;text-transform:uppercase">Suara Terbaru</h3><div id="rec"><p style="color:var(--mut);font-size:14px">Memuat…</p></div></div>
+</div></div></section>
+</main>
+
+<div class="svc"><div class="wrap">
+<div class="rv"><i>🆓</i><span><b>Gratis</b>Tanpa biaya</span></div>
+<div class="rv" style="--d:.1s"><i>⏱️</i><span><b>Cepat</b>Kurang dari 1 menit</span></div>
+<div class="rv" style="--d:.2s"><i>🛡️</i><span><b>Privasi</b>Data aman</span></div>
+<div class="rv" style="--d:.3s"><i>💬</i><span><b>Terbuka</b>Kritik &amp; saran</span></div>
+</div></div>
+
+<footer id="kontak"><div class="wrap">
+<div><div class="logo" style="color:#fff;margin-bottom:12px">🍃 KOTAKU</div><p>Survei kota favorit di Indonesia.<br>Dari kamu, untuk kita semua.</p></div>
+<div><h5>Tautan</h5><a href="#beranda">Beranda</a><a href="#kota">Kota</a><a href="#peringkat">Peringkat</a></div>
+<div><h5>Survei</h5><a href="#survei">Ikut Survei</a><a href="#peringkat">Hasil</a></div>
+<div><h5>Kontak</h5><a>halo@kotaku.id</a><a>Indonesia</a></div>
+</div><div class="cp">© 2026 KotaKu. Seluruh hak cipta dilindungi.</div></footer>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
